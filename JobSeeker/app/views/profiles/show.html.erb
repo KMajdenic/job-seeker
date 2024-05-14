@@ -1,0 +1,10 @@
+<h1>Profile page</h1>
+<br>
+<h2>Name</h2>: <%= @user.name %><br>
+<h2>Surname</h2>: <%= @user.surname %><br>
+<h2>Phone number</h2>: <%= @user.phone_number%><br>
+<h2>Bio</h2>: <%= @user.bio %><br>
+<ul>
+  <li><%= link_to "Edit user data",  edit_users_profiles_path%></li>
+  <li><%= link_to "Sign out ", destroy_user_session_path %>
+</ul>

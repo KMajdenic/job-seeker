@@ -1,0 +1,32 @@
+<h2>Edit profile</h2>
+
+<%= form_for(current_user, url: users_profiles_path, method: :put)do |f|%>
+
+  <div class=field>
+    <%= f.label :name%><br />
+    <%= f.text_field :name, required: true%>
+  </div>
+
+  <div class=field>
+    <%= f.label :surname%><br />
+    <%= f.text_field :surname, required: true%>
+  </div>
+
+  <div class=field>
+    <%= f.label :phone_number%><br />
+    <%= f.text_field :phone_number, required: true%>
+  </div>
+
+  <div class=field>
+    <%= f.label :bio%><br />
+    <%= f.text_field :bio%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+
+<% end %>
+
+
+<%= link_to "Back", users_profiles_path %>

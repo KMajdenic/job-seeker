@@ -1,0 +1,42 @@
+/* styles.css */
+
+/* Include Tailwind utility styles */
+/* @import 'tailwindcss/utilities'; */
+
+/* Include Tailwind base styles */
+/* @import 'tailwindcss/base'; */
+
+/* Include Tailwind component styles */
+/* @import 'tailwindcss/components';   */
+
+
+/* Your custom Tailwind CSS */
+.header {
+  @apply bg-gray-900 h-20 flex items-center justify-center px-4;
+}
+
+.nav__container {
+  @apply w-full flex justify-between items-center;
+}
+
+.nav__logo {
+  @apply text-2xl font-bold uppercase;
+}
+
+.nav__links {
+  @apply flex gap-6 text-lg text-gray-300;
+}
+
+.nav__link {
+  @apply transition duration-300 hover:text-white;
+}
+
+.btn {
+  @apply btn btn--primary;
+}
+
+.btn--primary:hover {
+  @apply border-radius-15 bg-blue-600;
+}
+
+

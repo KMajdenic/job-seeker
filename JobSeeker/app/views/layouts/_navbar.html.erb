@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <header class="header">
+    <nav class="nav__container">
+      <div class="nav__logo">
+        <h1 class="logo">Logo</h1>
+      </div>
+      <ul class="nav__links">
+        <li class="nav__link">
+           <%= link_to "Profile", users_profiles_path %>
+        </li>
+        <li class="nav__link">
+          <a href="#">Categories</a>
+        </li>
+        <li class="nav__link">
+          <%= link_to "Sign out", destroy_user_session_path %>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</html>
