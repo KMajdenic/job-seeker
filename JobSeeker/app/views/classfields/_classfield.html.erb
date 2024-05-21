@@ -1,0 +1,16 @@
+<%= render "shared/modal" do%>
+<div id="<%= dom_id classfield %>">
+  <div class="classfield">
+  <h2><%= classfield.title %></h2>
+  <p><strong>Creator:</strong> <%= classfield.user.name %></p>
+  <p><strong>Description:</strong> <%= classfield.description %></p>
+  <p><strong>Category:</strong> <%= classfield.category.title %></p>
+  <p><strong>Status:</strong> <%= classfield.status %>
+  <p><strong>Last updated:</strong> <%= classfield.updated_at%>
+  </div>
+  <% if @classfield.user == current_user %>
+  <%= link_to "Edit this classfield", edit_classfield_path(@classfield) %> |
+  <%= button_to "Destroy this classfield", @classfield, method: :delete %>
+  <% end %>
+</div>
+<% end %>

@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="category">
+  <h2><%=  @category.title %></h2>
+  <strong>Avaliable jobs</strong>
+  <ul>
+    <% @classfields.each do |classfield|%>
+      <li><h3><%= classfield.title %></h2>
+      <p><strong>Creator:</strong> <%= classfield.user.name %></p>
+      <p><strong>Description:</strong> <%= classfield.description %></p>
+      <p>
+        <%= link_to "View details", classfield_path(classfield), data: {turbo_frame: "modal"} %>
+      </p></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= link_to "Back to classfields", categories_path %>
+

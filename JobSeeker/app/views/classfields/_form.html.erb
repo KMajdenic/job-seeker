@@ -1,0 +1,42 @@
+<%= form_with(model: classfield) do |f| %>
+  <% if classfield.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(classfield.errors.count, "error") %> prohibited this classfield from being saved:</h2>
+
+      <ul>
+        <% classfield.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class= field>
+    <%= f.label :title %><br />
+    <%= f.text_field :title, required: true%>
+  </div>    
+
+  <div class= field>
+    <%= f.label :description %><br />
+    <%= f.text_field :description, required: true%>
+  </div>
+  
+  <div class= field>
+    <%= f.label :category_id, "Category" %><br />
+    <%= f.collection_select :category_id, Category.all, :id, :title, prompt: "Select category"%>
+  </div>
+  
+  <div>
+    <%= f.label :tags %><br />
+    <%#<% Classfield::AVALIABLE_TAGS.each do |tag|%>
+      <%#<div>
+        <%#><%= check_box_tag "classfield[tags][]", tag, @classfield.tags.include?(tag) %>
+        <%#<%= label_tag "classfield_tags_#{tag}", tag %>
+      <%#</div> 
+    <%#<%end%>
+  </div>
+  
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
