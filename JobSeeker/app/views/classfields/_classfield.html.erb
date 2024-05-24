@@ -8,9 +8,16 @@
   <p><strong>Status:</strong> <%= classfield.status %>
   <p><strong>Last updated:</strong> <%= classfield.updated_at%>
   </div>
+  <% if @classfield.user != current_user && @classfield.user_classfields.where(user: current_user).empty? %>
+    <%= form_with(url: classfield_user_classfields_path(@classfield), method: :post) do %>
+    <%= submit_tag 'Apply for this job' %>
+  <% end %>
+
+  <% end %>
   <% if @classfield.user == current_user %>
-  <%= link_to "Edit this classfield", edit_classfield_path(@classfield) %> |
-  <%= button_to "Destroy this classfield", @classfield, method: :delete %>
+    <%= link_to 'View Applicants', classfield_user_classfields_path(@classfield), data: { turbo: false } %>
+    <%= link_to "Edit this classfield", edit_classfield_path(@classfield),data: { turbo: false } %> |
+    <%= button_to "Destroy this classfield", @classfield, method: :delete %>
   <% end %>
 </div>
 <% end %>

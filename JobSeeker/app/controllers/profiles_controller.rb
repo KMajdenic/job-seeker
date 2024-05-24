@@ -1,7 +1,7 @@
 #frozen_string_literal: true
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-
+  # before_action :check_setup_complete, except: [:edit, :update]
   def show
     @user = current_user
   end
@@ -22,6 +22,12 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  # def check_setup_complete
+  #   if current_user.setup_complete?
+  #     redirect_to edit_users_profiles_path
+  #   end
+  # end
 
   def user_params
     params.require(:user).permit(:name, :surname, :phone_number, :bio)

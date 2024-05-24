@@ -1,0 +1,2 @@
+module UserClassfieldsHelper
+end

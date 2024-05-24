@@ -1,19 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Classfields</h1>
+<h1>My classfields</h1>
+
+<%= link_to "Posted Jobs", my_classfields_path %>
+<%= link_to "Job applications", my_applications_path%>
 
 <% if @classfields.any? %>
-
-<div class="classfields">
-  <% @classfields.each do |classfield| %>
-    <h3><%= classfield.title %></h2>
-    <p><strong>Creator:</strong> <%= classfield.user.name %></p>
-    <p><strong>Description:</strong> <%= classfield.description %></p>
-    <p>
-      <%= link_to "View details", classfield_path(classfield), data: {turbo_frame: "modal"} %>
-    </p>
-  <% end %>
-</div>
+  <div class="classfields">
+    <% @classfields.each do |classfield| %>
+      <h3><%= classfield.title %></h2>
+      <p><strong>Creator:</strong> <%= classfield.user.name %></p>
+      <p><strong>Description:</strong> <%= classfield.description %></p>
+      <p>
+        <%= link_to "View details", classfield_path(classfield), data: {turbo_frame: "modal"} %>
+      </p>
+    <% end %>
+  </div>
 
 <% else %>
   <p>No classfields avaliable</p>

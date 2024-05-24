@@ -32,7 +32,7 @@ class ClassfieldsController < ApplicationController
 
     respond_to do |format|
       if @classfield.save
-        format.html { redirect_to my_classfields(@classfield), notice: "Classfield was successfully created." }
+        format.html { redirect_to my_classfields_url(@classfield), notice: "Classfield was successfully created." }
         format.json { render :index, status: :created, location: @classfield }
       else
         format.html { render :new, status: :unprocessable_entity }

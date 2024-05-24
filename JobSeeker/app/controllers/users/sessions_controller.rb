@@ -11,19 +11,25 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super do |resource|
-      if !resource.setup_complete?
-        redirect_to edit_users_profiles_path(resource), notice: "Please complete your initial registration."
-      end
-      return
+      unless resource.setup_complete?
     end
   end
+end
 
   # DELETE /resource/sign_out
   def destroy
     super
   end
 
-  # protected
+  protected
+
+  def sign_in_redirection_path(resource)
+    if resource.is_a?(User) && !resource.setup_complete?
+      edit_users_profiles_path(resource)
+    else
+      super
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
