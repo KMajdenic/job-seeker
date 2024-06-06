@@ -1,6 +1,6 @@
 class ClassfieldsController < ApplicationController
   # before_action :set_classfield, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :index]
   before_action :set_classfield, only: [:show, :edit]
   # GET /classfields or /classfields.json
   def index

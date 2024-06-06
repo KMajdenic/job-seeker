@@ -4,10 +4,12 @@
 
 <div id="categories">
   <% @categories.each do |category| %>
-    <strong><%= category.title %></strong>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
+    <% if category.classfields.any? %>
+      <strong><%= category.title %></strong>
+      <p>
+        <%= link_to "Show this category", category %>
+      </p>
+    <%end%>
   <% end %>
 </div>
 

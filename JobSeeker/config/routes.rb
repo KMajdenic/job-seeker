@@ -26,5 +26,5 @@ Rails.application.routes.draw do
     root to: "profiles#show", as: :authenticated_root
   end
   # Defines the root path route ("/")
-  root to: redirect("/users/sign_in")
+  root to: redirect("/categories")
 end

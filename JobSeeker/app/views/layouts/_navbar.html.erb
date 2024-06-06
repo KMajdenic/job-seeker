@@ -7,17 +7,23 @@
       </div>
       <ul class="nav__links">
         <li class="nav__link">
-           <%= link_to "Profile", users_profiles_path %>
-        </li>
-        <li class="nav__link">
           <%= link_to "Categories", categories_path%>
         </li>
+        <% if user_signed_in? %>
+          <li class="nav__link">
+            <%= link_to "Profile", users_profiles_path %>
+          </li>
         <li class="nav__link">
           <%= link_to "My jobs", my_classfields_path %>
         </li>
         <li class="nav__link">
           <%= link_to "Sign out", destroy_user_session_path %>
         </li>
+        <% else %>
+          <li class ="nav_link">
+             <%= link_to "Sign in", new_user_session_path %>
+          </li>
+        <% end %>
       </ul>
     </nav>
   </header>
