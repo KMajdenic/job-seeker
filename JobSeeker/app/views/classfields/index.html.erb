@@ -4,7 +4,15 @@
 
 <%= link_to "Posted Jobs", my_classfields_path %>
 <%= link_to "Job applications", my_applications_path%>
-
+<%= form_with url: my_classfields_path, method: :get, local: true do%>
+  <div class="field">
+    <%= label_tag :tag_id, "Filter by tag" %>
+    <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, selected: params[:tag_id]),  multiple: true%>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Filter" %>
+  </div>
+<% end %>
 <% if @classfields.any? %>
   <div class="classfields">
     <% @classfields.each do |classfield| %>

@@ -1,4 +1,4 @@
-<%= form_with(model: classfield) do |f| %>
+<%= form_with(model: classfield, local: true) do |f| %>
   <% if classfield.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(classfield.errors.count, "error") %> prohibited this classfield from being saved:</h2>
@@ -26,14 +26,9 @@
     <%= f.collection_select :category_id, Category.all, :id, :title, prompt: "Select category"%>
   </div>
   
-  <div>
-    <%= f.label :tags %><br />
-    <%#<% Classfield::AVALIABLE_TAGS.each do |tag|%>
-      <%#<div>
-        <%#><%= check_box_tag "classfield[tags][]", tag, @classfield.tags.include?(tag) %>
-        <%#<%= label_tag "classfield_tags_#{tag}", tag %>
-      <%#</div> 
-    <%#<%end%>
+  <div class="field">
+    <%= f.label :tag_id %><br />
+    <%= f.collection_select :tag_id, Tag.all, :id, :name, {prompt:"Select tags"},{multiple: true}%><br/>
   </div>
   
   <div>

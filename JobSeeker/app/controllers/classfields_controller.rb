@@ -1,10 +1,14 @@
 class ClassfieldsController < ApplicationController
   # before_action :set_classfield, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :index]
-  before_action :set_classfield, only: [:show, :edit]
+  before_action :set_classfield, only: [:show, :edit, :update, :destroy]
   # GET /classfields or /classfields.json
   def index
-    @classfields = current_user.classfields
+    if params[:tag_id].present?
+      @classfields = Classfield.joins(:tags).where(tags: { id: params[:tag_id].map(&:to_i) }).distinct
+    else
+      @classfields = current_user.classfields
+    end
   end
 
   # GET /classfields/1 or /classfields/1.json
@@ -59,7 +63,7 @@ class ClassfieldsController < ApplicationController
     @classfield.destroy!
 
     respond_to do |format|
-      format.html { redirect_to classfields_url, notice: "Classfield was successfully destroyed." }
+      format.html { redirect_to my_classfields_url, notice: "Classfield was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -76,6 +80,6 @@ class ClassfieldsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def classfield_params
-      params.require(:classfield).permit(:title, :description, :status, :user_id, :category_id)
+      params.require(:classfield).permit(:title, :description, :status, :user_id, :category_id, tag_id: [])
     end
 end
