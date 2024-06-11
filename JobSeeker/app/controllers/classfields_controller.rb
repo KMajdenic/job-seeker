@@ -4,10 +4,10 @@ class ClassfieldsController < ApplicationController
   before_action :set_classfield, only: [:show, :edit, :update, :destroy]
   # GET /classfields or /classfields.json
   def index
-    if params[:tag_id].present?
-      @classfields = Classfield.joins(:tags).where(tags: { id: params[:tag_id].map(&:to_i) }).distinct
+    if params[:tag_ids].present?
+      @classfields = Classfield.joins(:tags).where(tags: { id: params[:tag_ids].map(&:to_i) }).distinct
     else
-      @classfields = current_user.classfields
+      @classfields = Classfield.all
     end
   end
 
@@ -36,7 +36,7 @@ class ClassfieldsController < ApplicationController
 
     respond_to do |format|
       if @classfield.save
-        format.html { redirect_to my_classfields_url(@classfield), notice: "Classfield was successfully created." }
+        format.html { redirect_to applications_url(@classfield), notice: "Classfield was successfully created." }
         format.json { render :index, status: :created, location: @classfield }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -63,7 +63,7 @@ class ClassfieldsController < ApplicationController
     @classfield.destroy!
 
     respond_to do |format|
-      format.html { redirect_to my_classfields_url, notice: "Classfield was successfully destroyed." }
+      format.html { redirect_to applications_url, notice: "Classfield was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -73,13 +73,14 @@ class ClassfieldsController < ApplicationController
 
     def set_classfield
       @classfield = Classfield.find(params[:id])
+       @tags = @classfield.tags
     rescue ActiveRecord::RecordNotFound
       flash[:alert] = "Classfield not found."
-      redirect_to my_classfields_path
+      redirect_to applications_path
     end
 
     # Only allow a list of trusted parameters through.
     def classfield_params
-      params.require(:classfield).permit(:title, :description, :status, :user_id, :category_id, tag_id: [])
+      params.require(:classfield).permit(:title, :description, :status, :user_id, :category_id, tag_ids: [])
     end
 end

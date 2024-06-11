@@ -27,8 +27,8 @@
   </div>
   
   <div class="field">
-    <%= f.label :tag_id %><br />
-    <%= f.collection_select :tag_id, Tag.all, :id, :name, {prompt:"Select tags"},{multiple: true}%><br/>
+    <%= f.label :tag_ids %><br />
+    <%= f.collection_select :tag_ids, Tag.all, :id, :name, {prompt:"Select tags"},{multiple: true}%><br/>
   </div>
   
   <div>

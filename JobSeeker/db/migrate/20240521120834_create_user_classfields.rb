@@ -1,6 +1,6 @@
 class CreateUserClassfields < ActiveRecord::Migration[7.1]
   def up
-    create_table :user_classfields do |t|
+    create_table :applications do |t|
       t.references :user, null: false, foreign_key: true
       t.references :classfield, null: false, foreign_key: true
       t.boolean :accepted, default: false
@@ -11,6 +11,6 @@ class CreateUserClassfields < ActiveRecord::Migration[7.1]
   end
 
   def down
-    drop_table :user_classfields
+    drop_table :applications
   end
 end

@@ -1,0 +1,28 @@
+<h1>Applicants for <%= @classfield.title %></h1>
+<% if @applications.any? %>
+<table>
+  <thead>
+    <tr>
+      <th>Applicant</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @applications.each do |application| %>
+      <tr>
+        <td><%= application.user.email %></td>
+        <td><%= application.status %></td>
+        <td>
+          <% if application.pending? %>
+            <%= button_to 'Accept', classfield_application_path(@classfield, application, application: { status: :accepted }), method: :patch, data: { turbo: false } %>
+            <%= button_to 'Reject', classfield_application_path(@classfield, application, application: { status: :rejected }), method: :patch, data: { turbo: false } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <p>No applicants at this moment</p>
+<% end %>

@@ -11,11 +11,11 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :classfields, only: [:show, :new, :edit, :update]  do
-    resources :user_classfields, only: [:create, :index, :update]
+    resources :applications, only: [:create, :index, :update]
   end
 
-  get "my-classfields", to: "classfields#index", as: "my_classfields"
-  get "my-applications", to: "user_classfields#user_applications", as: "my_applications"
+  get "user/classfields", to: "users#index", as: "user_classfields"
+  get "user/applications", to: "applications#user_applications", as: "user_applications"
 
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

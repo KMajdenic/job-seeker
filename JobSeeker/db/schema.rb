@@ -10,14 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_06_184139) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_11_081630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "applications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "classfield_id", null: false
+    t.boolean "accepted", default: false
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classfield_id"], name: "index_applications_on_classfield_id"
+    t.index ["user_id"], name: "index_applications_on_user_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "classfield_tags", force: :cascade do |t|
+    t.bigint "classfield_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classfield_id"], name: "index_classfield_tags_on_classfield_id"
+    t.index ["tag_id"], name: "index_classfield_tags_on_tag_id"
   end
 
   create_table "classfields", force: :cascade do |t|
@@ -46,17 +66,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_184139) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_classfields", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "classfield_id", null: false
-    t.boolean "accepted", default: false
-    t.string "status", default: "pending", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["classfield_id"], name: "index_user_classfields_on_classfield_id"
-    t.index ["user_id"], name: "index_user_classfields_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -74,8 +83,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_184139) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "applications", "classfields"
+  add_foreign_key "applications", "users"
+  add_foreign_key "classfield_tags", "classfields"
+  add_foreign_key "classfield_tags", "tags"
   add_foreign_key "classfields", "categories"
   add_foreign_key "classfields", "users"
-  add_foreign_key "user_classfields", "classfields"
-  add_foreign_key "user_classfields", "users"
 end

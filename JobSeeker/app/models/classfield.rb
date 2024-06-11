@@ -2,9 +2,10 @@ class Classfield < ApplicationRecord
   #AVALIABLE_TAGS=["Kućanstvo", "IT", "Građevinarstvo"]
   belongs_to :user
   belongs_to :category
-  has_many :user_classfields
-  has_many :applicants, through: :user_classfields, source: :user
-  has_and_belongs_to_many :tags
+  has_many :applications
+  has_many :applicants, through: :applications, source: :user
+  has_many :classfield_tags
+  has_many :tags, through: :classfield_tags
   validates :user, presence: true
 
   enum status: { draft: 0, published: 1, archived: 2 }
