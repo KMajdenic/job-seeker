@@ -21,6 +21,13 @@
           <td><%= applications.status %></td>
           <% if applications.status == "accepted"%>
             <td><%= applications.classfield.user.phone_number%></td>
+            <td>
+              <% unless applications.review.present? %>
+                <%= link_to "Add review", new_applicant_review_classfield_application_reviews_path(applications.classfield, applications)%>
+              <% else %>
+                <button disabled>Review Added</button>
+              <% end %>
+            </td>
           <% end %>
         </tr>
       <% end %>

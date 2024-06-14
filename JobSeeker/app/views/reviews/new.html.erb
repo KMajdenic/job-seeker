@@ -1,0 +1,30 @@
+<h1>New Review</h1>
+
+<%= form_with(model: [@application, @review],url: classfield_application_reviews_path(@application), data: { turbo: false }, local: true) do |form| %>
+  <% if @review.errors.any? %>
+    <div class="error">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.select :rating, options_for_select(Review.ratings.keys.map { |r| [r.humanize, r] }) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note %>
+    <%= form.text_area :note %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', classfield_applications_path(@application.classfield, @application) %>

@@ -14,7 +14,7 @@ class ApplicationsController < ApplicationController
   end
 
   def index
-    @applications= @classfield.applications
+    @applications= @classfield.applications.includes(user: :recieved_reviews)
   end
 
   def update

@@ -10,8 +10,15 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :classfields, only: [:show, :new, :edit, :update]  do
-    resources :applications, only: [:create, :index, :update]
+  resources :classfields, only: [:show, :new, :edit, :update, :index, :create]  do
+    resources :applications, only: [:create, :index, :update] do
+      resources :reviews, only: [:new, :create, :index] do
+        collection do
+          get :new_applicant_review
+          post :create_applicant_review
+        end
+      end
+    end
   end
 
   get "user/classfields", to: "users#index", as: "user_classfields"

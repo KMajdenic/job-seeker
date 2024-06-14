@@ -4,6 +4,9 @@
   <thead>
     <tr>
       <th>Applicant</th>
+      <th>Positive Reviews (%)</th>
+      <th>Negative Reviews (%)</th>
+      <th>Not Reviewed (%)</th>
       <th>Status</th>
       <th>Actions</th>
     </tr>
@@ -12,11 +15,19 @@
     <% @applications.each do |application| %>
       <tr>
         <td><%= application.user.email %></td>
+        <td><%= application.user.positive_reccomendation_rating %></td>
+        <td><%= application.user.negative_reccomendation_rating %></td>
+        <td><%= application.user.unrated_rating %></td>
         <td><%= application.status %></td>
         <td>
           <% if application.pending? %>
-            <%= button_to 'Accept', classfield_application_path(@classfield, application, application: { status: :accepted }), method: :patch, data: { turbo: false } %>
-            <%= button_to 'Reject', classfield_application_path(@classfield, application, application: { status: :rejected }), method: :patch, data: { turbo: false } %>
+            <%= button_to "Accept", classfield_application_path(@classfield, application, application: { status: :accepted }), method: :patch, data: { turbo: false } %>
+            <%= button_to "Reject", classfield_application_path(@classfield, application, application: { status: :rejected }), method: :patch, data: { turbo: false } %>
+          <% end %>
+          <% unless application.review.present? %>
+            <%= link_to "Add review", new_classfield_application_review_path(@classfield, application)%>
+          <% else %>
+            <button disabled>Review Added</button>
           <% end %>
         </td>
       </tr>
@@ -26,3 +37,5 @@
 <% else %>
   <p>No applicants at this moment</p>
 <% end %>
+
+<%= link_to 'Back', user_classfields_path %>

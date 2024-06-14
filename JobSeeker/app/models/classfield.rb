@@ -6,8 +6,8 @@ class Classfield < ApplicationRecord
   has_many :applicants, through: :applications, source: :user
   has_many :classfield_tags
   has_many :tags, through: :classfield_tags
+  has_many :reviews, through: :applications
   validates :user, presence: true
 
   enum status: { draft: 0, published: 1, archived: 2 }
-  #serialize :tags, coder: Array
 end
