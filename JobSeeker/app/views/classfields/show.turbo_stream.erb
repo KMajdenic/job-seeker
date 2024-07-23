@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "modal" do %>
+  <%= turbo_frame_tag "modal" do %>
+    <%= render "shared/modal" do %>
+      <%= render partial: "classfields/classfield", locals: { classfield: @classfield, tags: @tags } %>
+    <% end %>
+  <% end %>
+<% end %>

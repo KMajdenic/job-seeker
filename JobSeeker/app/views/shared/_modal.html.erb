@@ -3,13 +3,14 @@
     <!-- Clicking outside the modal will cause it to close -->
     <div class="modal-background" data-action="click->modal#close"></div>
 
-    <div class="modal-styles-and-stuff">
+    <div class="modal-content">
 
       <%= turbo_frame_tag "modal-body" do %>
         <%= yield %>
       <% end %>
       
-      <button data-action="modal#close">Close</button>
-    </div>
+      </div>
+      <button data-action="modal#close" class="button-red">Close</button>
+    
   </div>
 <% end %>

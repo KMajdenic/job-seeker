@@ -10,6 +10,6 @@
     "stimulus-flatpickr": "^1.4.0"
   },
   "scripts": {
-    "build:css": "tailwindcss build -i app/assets/stylesheets/application.css -o app/assets/stylesheets/styles.css"
+    "build:css": "tailwindcss build -i app/assets/stylesheets/application.tailwind.css -o app/assets/stylesheets/application.css"
   }
 }

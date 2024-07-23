@@ -447,3 +447,6 @@ yarn-error.log
 package-lock.json
 yarn.lock
 
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

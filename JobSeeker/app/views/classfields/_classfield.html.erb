@@ -1,24 +1,28 @@
-<%= render "shared/modal" do%>
-<div id="<%= dom_id classfield %>">
-  <div class="classfield">
-  <h2><%= classfield.title %></h2>
-  <p><strong>Creator:</strong> <%= classfield.user.name %></p>
-  <p><strong>Description:</strong> <%= classfield.description %></p>
-  <p><strong>Category:</strong> <%= classfield.category.title %></p>
-  <p><strong>Tags:</strong> <%= @tags.map(&:name).join(", ") %></p>
-  <p><strong>Status:</strong> <%= classfield.status %>
-  <p><strong>Last updated:</strong> <%= classfield.updated_at%>
-  </div>
-  <% if @classfield.user != current_user && @classfield.applications.where(user: current_user).empty? && user_signed_in? %>
-    <%= form_with(url: classfield_applications_path(@classfield), method: :post) do %>
-    <%= submit_tag 'Apply for this job' %>
-  <% end %>
+  <%= turbo_frame_tag "modal" do %>
+    <div id="<%= dom_id classfield %>" class="modal-content">
+      <div class="classfield">
+        <h2><%= classfield.title %></h2>
+        <p><strong>Creator:</strong> <%= classfield.user.name %></p>
+        <p><strong>Description:</strong> <%= classfield.description %></p>
+        <p><strong>Category:</strong> <%= classfield.category.title %></p>
+        <p><strong>Tags:</strong> <%= @tags.map(&:name).join(", ") %></p>
+        <p><strong>Status:</strong> <%= classfield.status %></p>
+        <p><strong>Last updated:</strong> <%= classfield.updated_at %></p>
+      </div>
+      <% if classfield.user != current_user && @classfield.applications.where(user: current_user).empty? && user_signed_in? %>
+        <%= form_with(url: classfield_applications_path(classfield), method: :post) do %>
+        <div class="submit-button">
+        <%= submit_tag 'Apply for this job' %>
+        </div>
+        <% end %>
+      <% end %>
 
-  <% end %>
-  <% if @classfield.user == current_user %>
-    <%= link_to 'View Applicants', classfield_applications_path(@classfield), data: { turbo: false } %>
-    <%= link_to "Edit this classfield", edit_classfield_path(@classfield),data: { turbo: false } %> |
-    <%= button_to "Destroy this classfield", @classfield, method: :delete %>
-  <% end %>
-</div>
-<% end %>
+      <% if classfield.user == current_user %>
+        <div class="mt-4">
+          <%= link_to 'View Applicants', classfield_applications_path(classfield), data: { turbo: false } %>
+          <%= link_to "Edit this classfield", edit_classfield_path(classfield),data: { turbo: false } %> |
+          <%= button_to "Destroy this classfield", classfield, method: :delete %>
+        </div>
+    <% end %>
+  </div>
+<%end%>
