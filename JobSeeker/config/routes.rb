@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :classfields, only: [:show, :new, :edit, :update, :index, :create]  do
-    resources :applications, only: [:create, :index, :update] do
+    resources :applications, only: [:new, :create, :index, :update] do
       resources :reviews, only: [:new, :create, :index] do
         collection do
           get :new_applicant_review

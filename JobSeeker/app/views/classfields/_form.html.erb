@@ -31,7 +31,7 @@
     <%= f.collection_select :tag_ids, Tag.all, :id, :name, {prompt:"Select tags"},{multiple: true}%><br/>
   </div>
   
-  <div>
+  <div class="submit-button">
     <%= f.submit %>
   </div>
 <% end %>

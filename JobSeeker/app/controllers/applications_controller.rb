@@ -1,21 +1,39 @@
 class ApplicationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_classfield, only: [:index, :create]
+  before_action :set_classfield, only: [:new, :update, :index, :create]
   before_action :set_application, only: [:update]
+
+  def index
+    @applications= @classfield.applications.includes(user: :recieved_reviews)
+  end
+
+  def new
+    @application = @classfield.Application.new
+  end
 
   def create
     @application = @classfield.applications.build(user: current_user,status: "pending")
 
     if @application.save
-      redirect_to classfield_applications_path(@classfield), notice: "You have successfully applied for this job!"
+      respond_to do |format|
+        format.turbo_stream { flash.now[:notice] = "You have successfully applied for this job!" }
+        format.html { redirect_to classfield_applications_path(@classfield), notice: "You have successfully applied for this job!" }
+      end
     else
-      redirect_to @classfield, notice: "Unable to apply for this job."
+      respond_to do |format|
+        format.turbo_stream { flash.now[:alert] = "Unable to apply for this job." }
+        format.html { redirect_to categories_path, alert: "Unable to apply for this job." }
+      end
     end
+
+
+    # if @application.save
+    #   redirect_to classfield_applications_path, notice: "You have successfully applied for this job!"
+    # else
+    #   redirect_to categories_path, notice: "Unable to apply for this job."
+    # end
   end
 
-  def index
-    @applications= @classfield.applications.includes(user: :recieved_reviews)
-  end
 
   def update
     if @application.update(application_params)

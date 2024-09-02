@@ -1,5 +1,7 @@
   <%= turbo_frame_tag "modal" do %>
+  <div class="modal-background" data-controller="modal" data-action="click->modal#close">
     <div id="<%= dom_id classfield %>" class="modal-content">
+      <%#<button class="modal-close" data-action="click->modal#close">&times;</button%>
       <div class="classfield">
         <h2><%= classfield.title %></h2>
         <p><strong>Creator:</strong> <%= classfield.user.name %></p>
@@ -10,9 +12,9 @@
         <p><strong>Last updated:</strong> <%= classfield.updated_at %></p>
       </div>
       <% if classfield.user != current_user && @classfield.applications.where(user: current_user).empty? && user_signed_in? %>
-        <%= form_with(url: classfield_applications_path(classfield), method: :post) do %>
-        <div class="submit-button">
-        <%= submit_tag 'Apply for this job' %>
+        <%= form_with(url: classfield_applications_path(classfield), method: :post, data:{turbo_frame: "_top"}) do %>
+        <div class="submit-button" >
+          <%= submit_tag "Apply for this job" %>
         </div>
         <% end %>
       <% end %>
@@ -24,5 +26,6 @@
           <%= button_to "Destroy this classfield", classfield, method: :delete %>
         </div>
     <% end %>
+  </div>
   </div>
 <%end%>
