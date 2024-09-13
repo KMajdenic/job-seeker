@@ -20,17 +20,20 @@
 
 
 @layer components{
-
   
- 
+  /* Modal background */
+  .modal-background.hidden {
+    display: none;
+  }
+
   /* Modal background */
   .modal-background {
-    @apply fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50;
+    @apply fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-0;
   }
   
   /* Modal content */
   .modal-content {
-    @apply bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-2xl;
+    @apply bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-2xl z-10;
   }
   
   .modal-close {
@@ -44,7 +47,7 @@
   }
   /* Form submit button */
   .submit-button {
-    @apply mt-4 bg-blue-500 text-white px-4 py-2 rounded;
+    @apply mt-4 bg-blue-500 text-white px-4 py-2 rounded z-20;
   }
   
   /* Links */

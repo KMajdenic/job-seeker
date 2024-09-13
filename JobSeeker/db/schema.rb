@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_14_091752) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_12_115339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,10 +67,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_091752) do
     t.text "note"
     t.bigint "user_id", null: false
     t.bigint "classfield_id", null: false
+    t.bigint "application_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "application_id"
-    t.integer "review_type", default: 0
     t.index ["application_id"], name: "index_reviews_on_application_id"
     t.index ["classfield_id"], name: "index_reviews_on_classfield_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
@@ -100,13 +99,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_091752) do
   end
 
   add_foreign_key "applications", "classfields"
-  add_foreign_key "applications", "reviews"
   add_foreign_key "applications", "users"
   add_foreign_key "classfield_tags", "classfields"
   add_foreign_key "classfield_tags", "tags"
   add_foreign_key "classfields", "categories"
   add_foreign_key "classfields", "users"
-  add_foreign_key "reviews", "applications"
-  add_foreign_key "reviews", "classfields"
-  add_foreign_key "reviews", "users"
 end

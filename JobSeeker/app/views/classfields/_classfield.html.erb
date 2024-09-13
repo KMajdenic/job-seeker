@@ -1,5 +1,6 @@
-  <%= turbo_frame_tag "modal" do %>
-  <div class="modal-background" data-controller="modal" data-action="click->modal#close">
+  <div class="modal" data-controller="modal" data-modal-target="modal" >
+    <div class="modal-background" data-action="click->modal#handleBackgroundClick">
+    <%= turbo_frame_tag "modal" do %>
     <div id="<%= dom_id classfield %>" class="modal-content">
       <%#<button class="modal-close" data-action="click->modal#close">&times;</button%>
       <div class="classfield">
@@ -25,7 +26,8 @@
           <%= link_to "Edit this classfield", edit_classfield_path(classfield),data: { turbo: false } %> |
           <%= button_to "Destroy this classfield", classfield, method: :delete %>
         </div>
-    <% end %>
-  </div>
+      <% end %>
+      <button data-action="modal#close" class="submit-button">Close</button>
+    </div>
   </div>
 <%end%>

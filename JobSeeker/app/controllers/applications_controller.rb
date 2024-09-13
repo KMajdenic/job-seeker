@@ -17,7 +17,7 @@ class ApplicationsController < ApplicationController
     if @application.save
       respond_to do |format|
         format.turbo_stream { flash.now[:notice] = "You have successfully applied for this job!" }
-        format.html { redirect_to classfield_applications_path(@classfield), notice: "You have successfully applied for this job!" }
+        format.html { redirect_to category_path(@classfield.category), notice: "You have successfully applied for this job!" }
       end
     else
       respond_to do |format|

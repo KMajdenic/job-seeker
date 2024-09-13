@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
     @review = @application.build_review(review_params)
     @review.user = current_user
     @review.classfield = @application.classfield
-    @review.review_type = poster_review
+
 
     if @review.save
       redirect_to classfield_applications_path(@application.classfield), notice: 'Review was successfully created.'
@@ -30,7 +30,7 @@ class ReviewsController < ApplicationController
     @review = @application.build_review(review_params)
     @review.user = current_user
     @review.classfield = @application.classfield
-    @review.review_type = applicant_review
+
 
     if @review.save
       redirect_to classfield_applications_path(@application.classfield), notice: 'Review was successfully created.'

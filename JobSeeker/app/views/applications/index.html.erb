@@ -24,9 +24,9 @@
             <%= button_to "Accept", classfield_application_path(@classfield, application, application: { status: :accepted }), method: :patch, data: { turbo: false } %>
             <%= button_to "Reject", classfield_application_path(@classfield, application, application: { status: :rejected }), method: :patch, data: { turbo: false } %>
           <% end %>
-          <% unless application.review.present? %>
+          <% if application.review.nil? && application.accepted? %>
             <%= link_to "Add review", new_classfield_application_review_path(@classfield, application)%>
-          <% else %>
+          <% elsif application.review.present? %>
             <button disabled>Review Added</button>
           <% end %>
         </td>
